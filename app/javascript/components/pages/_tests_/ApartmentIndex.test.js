@@ -11,6 +11,6 @@ Enzyme.configure({ adapter: new Adapter() })
 describe("When ApartmentIndex loads...",() => {
     it('ApartmentIndex renders content', () => {
         const ApartmentIndex = shallow(<ApartmentIndex />)
-        expect(ApartmentIndex.find('p').text()).toEqual('All the apartments.')
+        expect(ApartmentIndex.find('p').text()).toEqual('This is apartment index')
     })
 })

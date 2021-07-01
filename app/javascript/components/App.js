@@ -1,15 +1,17 @@
-import React from "react";
-import { render } from '@testing-library/react';
+import React, { Component }from "react";
+import Home from "./pages/Home"
+import ApartmentIndex from "./pages/ApartmentIndex"
+import ApartmentNew from "./pages/ApartmentNew"
+import ApartmentShow from "./pages/ApartmentShow"
+import ApartmentEdit from "./pages/ApartmentEdit"
 import Header from "./components/Header";
-import mockApartments from "./mockApartments.js";
+import NotFound from "./pages/NotFound"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// import PropTypes from "prop-types"
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      apartments: mockApartments,
     };
   }
   render() {
@@ -20,6 +22,7 @@ class App extends Component {
       sign_in_route,
       sign_out_route,
     } = this.props;
+
     console.log("logged in:", logged_in, "current:", current_user);
     return (
       <>
@@ -31,12 +34,18 @@ class App extends Component {
 
         <Router>
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/apartmentindex" component={ApartmentIndex} />
-            <Route path="/apartmentshow/:id" component={ApartmentShow} />
-            <Route path="/apartmentnew" component={ApartmentNew} />
-            <Route path="/apartmentedit/:id" component={ApartmentEdit} />
-            <Route component={NotFound} />
+            <Route exact path="/" render={ (props) => <Home/>} />
+            <Route path="/apartmentindex" render={ (props) => <ApartmentIndex apartments={ this.state.apartments } /> } />
+
+            <Route path="/apartmentshow/:id" render={ (props) => {
+                let id = props.match.params.id
+                let apartment = this.state.apartments.find(apartment => apartment.id === +id)
+                return <ApartmentShow apartment={ apartment } />
+            }} />
+
+            <Route path="/apartmentnew" render={ (props) => <ApartmentNew/>} />
+            <Route path="/apartmentedit/:id" render={ (props) => <ApartmentEdit/>} />
+            <Route render={ (props) => <NotFound/>} />
           </Switch>
         </Router>
       </>
