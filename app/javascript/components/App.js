@@ -1,4 +1,5 @@
 import React from "react";
+import { render } from '@testing-library/react';
 import Header from "./components/Header";
 import mockApartments from "./mockApartments.js";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
