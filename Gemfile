@@ -52,3 +52,6 @@ gem "rspec-rails", "~> 5.0"
 gem "devise", "~> 4.8"
 
 gem "react-rails", "~> 2.6"
+
+gem 'rack-cors', :require => 'rack/cors'
+
