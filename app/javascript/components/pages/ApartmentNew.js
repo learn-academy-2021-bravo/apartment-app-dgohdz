@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { Form, FormGroup, Input, Label } from "reactstrap";
+import { Form, FormGroup, Input, Label, Button } from "reactstrap";
+import Footer from "../components/Footer"
+import { Redirect } from 'react-router-dom'
 
 class ApartmentNew extends Component {
   constructor(props) {
@@ -10,6 +12,7 @@ class ApartmentNew extends Component {
         city: "",
         price: "",
       },
+      success: false
     };
   }
 
@@ -20,8 +23,10 @@ class ApartmentNew extends Component {
   };
 
   handleSubmit = () => {
+    e.preventDefault()
     this.props.createNewApartment(this.state.form)
-  }
+    this.setState({ success: true })
+  };
 
   render() {
     return (
@@ -37,7 +42,12 @@ class ApartmentNew extends Component {
               value={this.state.form.name}
             />
           </FormGroup>
+          <Button name="submit" color="secondary" onClick={this.handleSubmit}>
+            Create a New Apartment
+          </Button>
         </Form>
+        <Footer />
+        { this.state.success && <Redirect to="/ApartmentIndex" />}
       </>
     );
   }

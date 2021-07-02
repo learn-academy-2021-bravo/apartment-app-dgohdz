@@ -18,7 +18,7 @@ apartments = [
     bedrooms:3,
     bathrooms:3,
     pets:'Yes',
-    user_id:user.id,
+    user_id:1
 },
 {
     street:"1275 Westchester Pl",
@@ -30,7 +30,7 @@ apartments = [
     bedrooms:1,
     bathrooms:1,
     pets:'Yes',
-    user_id:user.id,
+    user_id:1
 }
 ]
 apartments.each do |value|

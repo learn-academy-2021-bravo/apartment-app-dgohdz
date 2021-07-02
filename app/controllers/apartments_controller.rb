@@ -14,6 +14,11 @@ class ApartmentsController < ApplicationController
     end
   
     def update
+        apartment = Apartment.find(params[:id])
+        apartment.update(apartment_params)
+        if apartment.valid?
+            render json: apartment
+        end
     end
   
     def destroy

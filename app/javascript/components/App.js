@@ -21,10 +21,10 @@ class App extends Component {
   }
 
   componentDidMount(){
-    this.ApartmentIndex()
+    this.apartmentIndex()
   }
   
-  ApartmentIndex = () => {
+  apartmentIndex = () => {
     fetch("http://localhost:3000/apartments")
     .then(response => {
       return response.json()
@@ -50,13 +50,13 @@ class App extends Component {
     console.log("logged in:", logged_in, "current:", current_user);
     return (
       <>
+
+        <Router>
         <Header
           sign_in_route={sign_in_route}
           sign_out_route={sign_out_route}
           logged_in={logged_in}
         />
-
-        <Router>
           <Switch>
             <Route exact path="/" render={ (props) => <Home/>} />
             <Route path="/apartmentindex" render={ (props) => <ApartmentIndex apartments={ this.state.apartments } /> } />
