@@ -12,8 +12,32 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      apartments:[]
     };
   }
+
+  createNewApartment = (newapartment) => {
+    console.log(newapartment)
+  }
+
+  componentDidMount(){
+    this.ApartmentIndex()
+  }
+  
+  ApartmentIndex = () => {
+    fetch("http://localhost:3000/apartments")
+    .then(response => {
+      return response.json()
+    })
+    .then(apartmentsArray => {
+      // set the state with the data from the backend into the empty array
+      this.setState({ apartments: apartmentsArray })
+    })
+    .catch(errors => {
+      console.log("index errors:", errors)
+    })
+  }
+  
   render() {
     const {
       logged_in,
@@ -43,7 +67,7 @@ class App extends Component {
                 return <ApartmentShow apartment={ apartment } />
             }} />
 
-            <Route path="/apartmentnew" render={ (props) => <ApartmentNew/>} />
+            <Route path="/apartmentnew" render={ (props) => <ApartmentNew createNewApartment={ this.createNewApartment } />} />
             <Route path="/apartmentedit/:id" render={ (props) => <ApartmentEdit/>} />
             <Route render={ (props) => <NotFound/>} />
           </Switch>
